@@ -24,10 +24,10 @@
         class="flex flex-col items-center justify-center border-2 border-dashed {{ $photo ? 'border-primary' : 'border-slate-300 dark:border-slate-700' }} rounded-xl bg-slate-50 dark:bg-slate-800/50 p-8 group hover:border-primary transition-colors cursor-pointer relative overflow-hidden h-64"
     >
         @if ($photo)
-            <div class="absolute inset-0 w-full h-full bg-slate-100 dark:bg-slate-900 flex items-center justify-center pointer-events-none">
+            <div class="absolute inset-0 w-full h-full bg-slate-100 dark:bg-slate-900 overflow-hidden pointer-events-none">
                 <img 
                     src="{{ $photo->temporaryUrl() }}" 
-                    class="max-w-full max-h-full w-auto h-auto object-contain p-3 transition-transform duration-300 group-hover:scale-[1.02]"
+                    class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
                     alt="Preview Foto Produk"
                 >
                 <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
