@@ -36,9 +36,9 @@
                 <a class="text-sm font-medium hover:text-primary transition-colors" href="{{ route('landing') }}">Home</a>
                 <a class="text-sm font-medium hover:text-primary transition-colors" href="#">Produk</a>
                 <a class="text-sm font-medium hover:text-primary transition-colors" href="{{ route('my-products') }}">Produk Saya</a>
-                <a class="text-sm font-medium hover:text-primary transition-colors" href="#">Keranjang</a>
-                <a class="text-sm font-medium hover:text-primary transition-colors" href="#">Pesanan</a>
-                <a class="text-sm font-medium hover:text-primary transition-colors" href="#">Pesan</a>
+                <a class="text-sm font-medium hover:text-primary transition-colors" href="{{ route('cart') }}">Keranjang</a>
+                <a class="text-sm font-medium hover:text-primary transition-colors" href="{{ route('my-orders') }}">Pesanan</a>
+                <a class="text-sm font-medium hover:text-primary transition-colors" href="{{ route('messages') }}">Pesan</a>
             </nav>
 
             <div class="flex items-center gap-4">
