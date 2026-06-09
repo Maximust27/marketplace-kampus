@@ -18,15 +18,15 @@ Route::get('/login', Login::class)->name('login')->middleware('guest');
 Route::get('/register', Register::class)->name('register')->middleware('guest');
 
 Route::get('/my-products', MyProduct::class)->name('my-products')->middleware('auth');
-Route::get('/add-product', AddProduct::class)->name('add-product')->middleware('auth');
-Route::get('/detail-product', ProductDetail::class)->name('detail-product')->middleware('auth'); 
-Route::get('/products', AllProduct::class)->name('products')->middleware('auth');
+Route::get('/add-product/{slug?}', AddProduct::class)->name('add-product')->middleware('auth');
+Route::get('/products/{slug}', ProductDetail::class)->name('detail-product'); 
+Route::get('/products', AllProduct::class)->name('products');
 Route::get('/cart', Cart::class)->name('cart')->middleware('auth');
 Route::get('/my-orders', MyOrder::class)->name('my-orders')->middleware('auth');
 Route::get('/messages', Inbox::class)->name('messages')->middleware('auth');
 
 Route::post('/logout', function (\Illuminate\Http\Request $request) {
-    Auth::logout();
+    \Illuminate\Support\Facades\Auth::logout();
     $request->session()->invalidate();
     $request->session()->regenerateToken();
     return redirect('/'); // Kembali ke halaman utama setelah logout

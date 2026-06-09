@@ -10,20 +10,27 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
 
-    <style>
+    <style data-navigate-track>
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
         .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
     </style>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    @livewireStyles
 </head>
 <body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col antialiased">
     
+    @php
+        $cartCount = auth()->check() ? auth()->user()->cartItems()->sum('quantity') : 0;
+        $unreadCount = auth()->check() ? app(App\Services\MessageService::class)->getUnreadCount(auth()->id()) : 0;
+        $buyerOrdersCount = auth()->check() ? auth()->user()->buyerOrders()->whereIn('status', [\App\Enums\OrderStatus::Pending, \App\Enums\OrderStatus::Confirmed])->count() : 0;
+        $sellerOrdersCount = auth()->check() ? auth()->user()->sellerOrders()->whereIn('status', [\App\Enums\OrderStatus::Pending, \App\Enums\OrderStatus::Confirmed])->count() : 0;
+        $totalOrdersCount = $buyerOrdersCount + $sellerOrdersCount;
+    @endphp
+
     <header class="border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-background-dark sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <div class="flex items-center gap-2">
-                <a href="{{ route('landing') }}" class="flex items-center gap-2">
+                <a href="{{ route('landing') }}" wire:navigate class="flex items-center gap-2">
                     <div class="bg-primary p-1.5 flex items-center justify-center rounded-[12px]">
                         <span class="material-symbols-outlined text-slate-900">shopping_bag</span>
                     </div>
@@ -33,12 +40,29 @@
             
             <!-- NAVBAR LENGKAP -->
             <nav class="hidden md:flex items-center gap-8">
-                <a class="text-sm font-medium hover:text-primary transition-colors" href="{{ route('landing') }}">Home</a>
-                <a class="text-sm font-medium hover:text-primary transition-colors" href="{{ route('products') }}">Produk</a>
-                <a class="text-sm font-medium hover:text-primary transition-colors" href="{{ route('my-products') }}">Produk Saya</a>
-                <a class="text-sm font-medium hover:text-primary transition-colors" href="{{ route('cart') }}">Keranjang</a>
-                <a class="text-sm font-medium hover:text-primary transition-colors" href="{{ route('my-orders') }}">Pesanan</a>
-                <a class="text-sm font-medium hover:text-primary transition-colors" href="{{ route('messages') }}">Pesan</a>
+                <a class="text-sm font-medium hover:text-primary transition-colors" href="{{ route('landing') }}" wire:navigate>Home</a>
+                <a class="text-sm font-medium hover:text-primary transition-colors" href="{{ route('products') }}" wire:navigate>Produk</a>
+                @auth
+                    <a class="text-sm font-medium hover:text-primary transition-colors" href="{{ route('my-products') }}" wire:navigate>Produk Saya</a>
+                    <a class="text-sm font-medium hover:text-primary transition-colors flex items-center gap-1" href="{{ route('cart') }}" wire:navigate>
+                        <span>Keranjang</span>
+                        @if($cartCount > 0)
+                            <span class="bg-primary text-slate-900 text-[10px] px-1.5 py-0.5 rounded-full font-bold">{{ $cartCount }}</span>
+                        @endif
+                    </a>
+                    <a class="text-sm font-medium hover:text-primary transition-colors flex items-center gap-1" href="{{ route('my-orders') }}" wire:navigate title="Beli: {{ $buyerOrdersCount }} | Jual: {{ $sellerOrdersCount }}">
+                        <span>Pesanan</span>
+                        @if($totalOrdersCount > 0)
+                            <span class="bg-primary text-slate-900 text-[10px] px-1.5 py-0.5 rounded-full font-bold">{{ $totalOrdersCount }}</span>
+                        @endif
+                    </a>
+                    <a class="text-sm font-medium hover:text-primary transition-colors flex items-center gap-1" href="{{ route('messages') }}" wire:navigate>
+                        <span>Pesan</span>
+                        @if($unreadCount > 0)
+                            <span class="bg-primary text-slate-900 text-[10px] px-1.5 py-0.5 rounded-full font-bold">{{ $unreadCount }}</span>
+                        @endif
+                    </a>
+                @endauth
             </nav>
 
             <div class="flex items-center gap-4">
@@ -47,7 +71,7 @@
                     
                     {{-- JIKA USER BELUM LOGIN --}}
                     @guest
-                        <a href="{{ route('login') }}" class="text-sm font-bold text-slate-700 dark:text-slate-300 hover:text-primary transition-colors">Masuk</a>
+                        <a href="{{ route('login') }}" wire:navigate class="text-sm font-bold text-slate-700 dark:text-slate-300 hover:text-primary transition-colors">Masuk</a>
                         <a href="{{ route('register') }}" wire:navigate class="hidden sm:block bg-primary text-slate-900 text-sm font-bold py-2 px-4 rounded-[12px] hover:opacity-90 transition-opacity">Daftar</a>
                     @endguest
 
@@ -56,15 +80,14 @@
                         <div x-data="{ open: false }" class="relative flex items-center gap-3">
                             <div class="text-right hidden sm:block">
                                 <p class="text-sm font-bold text-slate-900 dark:text-slate-100 leading-none">{{ auth()->user()->name }}</p>
-                                <!-- UBAH BAGIAN INI: Gunakan data role dari database -->
                                 <p class="text-[10px] text-slate-500 uppercase font-bold tracking-wider mt-1">
-                                    {{ auth()->user()->role ?? 'Mahasiswa' }}
+                                    {{ auth()->user()->role ? auth()->user()->role->label() : 'Mahasiswa' }}
                                 </p>
                             </div>
                             
                             <!-- Tombol Avatar Trigger -->
-                            <button @click="open = !open" @click.away="open = false" class="w-10 h-10 rounded-full bg-slate-200 overflow-hidden border-2 border-white dark:border-slate-700 shadow-sm rounded-[12px] focus:outline-none transition-transform active:scale-95">
-                                <img alt="{{ auth()->user()->name }}" class="w-full h-full object-cover" src="https://ui-avatars.com/api/?name={{ urlencode(auth()->user()->name) }}&background=0df2f2&color=102222&bold=true"/>
+                            <button @click="open = !open" @click.away="open = false" class="w-10 h-10 rounded-[12px] overflow-hidden border-2 border-white dark:border-slate-700 shadow-sm focus:outline-none transition-transform active:scale-95">
+                                <img alt="{{ auth()->user()->name }}" class="w-full h-full object-cover" src="{{ auth()->user()->avatar_url }}"/>
                             </button>
 
                             <!-- Menu Dropdown Melayang -->
@@ -80,7 +103,7 @@
                                 
                                 <div class="px-4 py-2 border-b border-slate-100 dark:border-slate-700 block sm:hidden">
                                     <p class="text-sm font-bold text-slate-900 dark:text-slate-100">{{ auth()->user()->name }}</p>
-                                    <p class="text-xs text-slate-500">Mahasiswa</p>
+                                    <p class="text-xs text-slate-500">{{ auth()->user()->role ? auth()->user()->role->label() : 'Mahasiswa' }}</p>
                                 </div>
 
                                 <form method="POST" action="{{ route('logout') }}">
@@ -113,15 +136,15 @@
                         <span class="font-bold text-lg">CampusHub</span>
                     </div>
                     <p class="text-slate-500 dark:text-slate-400 text-sm max-w-xs">
-                        Platform jual beli aman dan terpercaya khusus untuk mahasiswa dan civitas akademika di Politeknik Negeri Cilacap.
+                        Platform jual beli aman dan terpercaya khusus untuk mahasiswa dan civitas akademika di kampus Anda.
                     </p>
                 </div>
                 <div>
                     <h4 class="font-bold mb-4 text-sm uppercase tracking-wider">Link Populer</h4>
                     <ul class="space-y-2 text-sm text-slate-500 dark:text-slate-400">
-                        <li><a class="hover:text-primary" href="#">Buku Perkuliahan</a></li>
-                        <li><a class="hover:text-primary" href="#">Elektronik &amp; Laptop</a></li>
-                        <li><a class="hover:text-primary" href="#">Perlengkapan Kost</a></li>
+                        <li><a class="hover:text-primary" href="{{ route('products') }}" wire:navigate>Buku Perkuliahan</a></li>
+                        <li><a class="hover:text-primary" href="{{ route('products') }}" wire:navigate>Elektronik &amp; Laptop</a></li>
+                        <li><a class="hover:text-primary" href="{{ route('products') }}" wire:navigate>Perlengkapan Kost</a></li>
                     </ul>
                 </div>
                 <div>
@@ -144,6 +167,5 @@
         </div>
     </footer>
 
-    @livewireScripts
 </body>
 </html>

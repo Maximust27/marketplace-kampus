@@ -48,19 +48,11 @@
             <div class="mt-8 text-center">
                 <p class="text-sm text-slate-500">
                     Belum punya akun? 
-                    <a href="#" class="text-primary font-bold hover:underline ml-1">Daftar Sekarang</a>
+                    <a href="{{ route('register') }}" wire:navigate class="text-primary font-bold hover:underline ml-1">Daftar Sekarang</a>
                 </p>
             </div>
         </div>
 
-        <div class="bg-slate-50 px-8 py-4 border-t border-slate-100 flex items-center justify-center gap-4">
-            <span class="text-xs text-slate-400 uppercase font-bold tracking-wider">Atau masuk dengan</span>
-            <div class="flex gap-2">
-                <button type="button" class="p-2 bg-white border border-slate-200 rounded-[12px] hover:bg-slate-50 transition-colors">
-                    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVKS448ZQvsZ96IuNHn1nzfK_wrqwVKpqsAigLxoKekrUIB19tGHK4Psmvj_ifMPsn1OG0ZBSeR0Heuv4_pkXYtw_RQGI29lcrpu5jZgQyzl0HY3N4nEeUrIoGQ1M13LL8Wt3PknJZxl-K0S67U5KgI36KFLvIjLeTltWXhPPnLSv7lqnSMc4wkPut-_7qsxul5LwbloQI1BftVE6FKVcVAsm_vAxlITu2fx0bH5zq0ynYY1ZyCXIlyVyQyU2S09D0kUcBkHwx0rA" alt="Google" class="w-5 h-5"/>
-                </button>
-            </div>
-        </div>
-        
+
     </div>
 </div>
