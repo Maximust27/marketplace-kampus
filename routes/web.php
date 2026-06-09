@@ -6,10 +6,11 @@ use App\Livewire\Auth\Login;
 use App\Livewire\Auth\Register;
 use App\Livewire\Product\MyProduct;
 use App\Livewire\Product\AddProduct;
-use App\Livewire\Cart;
+use App\Livewire\Product\ProductDetail;
+use App\Livewire\Product\AllProduct;
+use App\Livewire\Cart\Cart;
 use App\Livewire\Order\MyOrder;
 use App\Livewire\Message\Inbox;
-
 
 // Landing Page tetap pakai Volt (jika belum dipisah)
 Volt::route('/', 'landing')->name('landing');
@@ -18,6 +19,8 @@ Route::get('/register', Register::class)->name('register')->middleware('guest');
 
 Route::get('/my-products', MyProduct::class)->name('my-products')->middleware('auth');
 Route::get('/add-product', AddProduct::class)->name('add-product')->middleware('auth');
+Route::get('/detail-product', ProductDetail::class)->name('detail-product')->middleware('auth'); 
+Route::get('/products', AllProduct::class)->name('products')->middleware('auth');
 Route::get('/cart', Cart::class)->name('cart')->middleware('auth');
 Route::get('/my-orders', MyOrder::class)->name('my-orders')->middleware('auth');
 Route::get('/messages', Inbox::class)->name('messages')->middleware('auth');

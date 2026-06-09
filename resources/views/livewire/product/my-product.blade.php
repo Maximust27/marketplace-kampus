@@ -36,9 +36,9 @@
                                 <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">Aktif</span>
                             </td>
                             <td class="px-6 py-4 text-sm font-bold leading-normal text-right">
-                                <button class="text-primary hover:text-primary/80 transition-colors">
+                                <a href="{{ route('add-product') }}" class="text-primary hover:text-primary/80 transition-colors">
                                     <span class="material-symbols-outlined">edit</span>
-                                </button>
+                                </a>
                             </td>
                         </tr>
                         <!-- Baris Produk 2 -->
@@ -53,9 +53,9 @@
                                 <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">Aktif</span>
                             </td>
                             <td class="px-6 py-4 text-sm font-bold leading-normal text-right">
-                                <button class="text-primary hover:text-primary/80 transition-colors">
+                                <a href="{{ route('add-product') }}" class="text-primary hover:text-primary/80 transition-colors">
                                     <span class="material-symbols-outlined">edit</span>
-                                </button>
+                                </a>
                             </td>
                         </tr>
                     </tbody>

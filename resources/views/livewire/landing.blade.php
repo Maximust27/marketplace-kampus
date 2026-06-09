@@ -66,7 +66,7 @@ layout('components.layouts.app');
                 <h2 class="text-3xl font-extrabold tracking-tight">Rekomendasi Hari Ini</h2>
                 <p class="mt-2 text-slate-500">Berdasarkan aktivitas dan jurusanmu</p>
             </div>
-            <button class="text-sm font-bold text-primary underline underline-offset-4 hover:text-primary/80">Lihat Semua</button>
+            <a href="{{ route('products') }}" class="text-sm font-bold text-primary underline underline-offset-4 hover:text-primary/80">Lihat Semua</a>
         </div>
         
         <div class="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4">

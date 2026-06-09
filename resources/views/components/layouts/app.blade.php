@@ -34,7 +34,7 @@
             <!-- NAVBAR LENGKAP -->
             <nav class="hidden md:flex items-center gap-8">
                 <a class="text-sm font-medium hover:text-primary transition-colors" href="{{ route('landing') }}">Home</a>
-                <a class="text-sm font-medium hover:text-primary transition-colors" href="#">Produk</a>
+                <a class="text-sm font-medium hover:text-primary transition-colors" href="{{ route('products') }}">Produk</a>
                 <a class="text-sm font-medium hover:text-primary transition-colors" href="{{ route('my-products') }}">Produk Saya</a>
                 <a class="text-sm font-medium hover:text-primary transition-colors" href="{{ route('cart') }}">Keranjang</a>
                 <a class="text-sm font-medium hover:text-primary transition-colors" href="{{ route('my-orders') }}">Pesanan</a>
@@ -113,7 +113,7 @@
                         <span class="font-bold text-lg">CampusHub</span>
                     </div>
                     <p class="text-slate-500 dark:text-slate-400 text-sm max-w-xs">
-                        Platform jual beli aman dan terpercaya khusus untuk mahasiswa dan civitas akademika di seluruh Indonesia.
+                        Platform jual beli aman dan terpercaya khusus untuk mahasiswa dan civitas akademika di Politeknik Negeri Cilacap.
                     </p>
                 </div>
                 <div>
@@ -134,7 +134,7 @@
                 </div>
             </div>
             <div class="border-t border-slate-100 dark:border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-                <p class="text-xs text-slate-400">© 2024 CampusHub. Dibuat dengan bangga untuk Mahasiswa.</p>
+                <p class="text-xs text-slate-400">© 2026 CampusHub. Dibuat dengan bangga untuk Mahasiswa.</p>
                 <div class="flex gap-6">
                     <a class="text-slate-400 hover:text-primary" href="#"><span class="material-symbols-outlined text-xl">language</span></a>
                     <a class="text-slate-400 hover:text-primary" href="#"><span class="material-symbols-outlined text-xl">mail</span></a>

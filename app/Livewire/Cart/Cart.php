@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Cart;
 
 use Livewire\Component;
 use Livewire\Attributes\Title;
@@ -15,6 +15,6 @@ class Cart extends Component
     
     public function render()
     {
-        return view('livewire.cart');
+        return view('livewire.cart.my-cart');
     }
 }

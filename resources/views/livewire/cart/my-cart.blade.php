@@ -29,7 +29,7 @@
 
         <!-- Action Button -->
         <div class="mt-10 flex flex-col sm:flex-row gap-4">
-            <a class="flex items-center justify-center gap-2 min-w-[200px] h-14 px-8 rounded-xl bg-primary text-background-dark font-bold text-lg hover:brightness-110 active:scale-95 transition-all shadow-lg shadow-primary/20" href="{{ route('landing') }}" wire:navigate>
+            <a class="flex items-center justify-center gap-2 min-w-[200px] h-14 px-8 rounded-xl bg-primary text-background-dark font-bold text-lg hover:brightness-110 active:scale-95 transition-all shadow-lg shadow-primary/20" href="{{ route('products') }}" wire:navigate>
                 <span class="material-symbols-outlined">storefront</span>
                 Mulai Belanja
             </a>
