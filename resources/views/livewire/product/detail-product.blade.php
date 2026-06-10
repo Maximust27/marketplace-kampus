@@ -40,13 +40,6 @@
             
             <!-- Rating & Sold -->
             <div class="flex items-center gap-2 mb-5">
-                <div class="flex text-amber-400">
-                    @for ($i = 0; $i < 5; $i++)
-                        <span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' {{ $i < round($product->avg_rating) ? '1' : '0' }};">star</span>
-                    @endfor
-                </div>
-                <span class="text-slate-500 text-sm font-medium">{{ number_format($product->avg_rating, 1) }} ({{ $product->review_count }} Ulasan)</span>
-                <span class="text-slate-300 mx-1">•</span>
                 <span class="text-slate-500 text-sm font-medium">{{ $product->sold_count }} Terjual</span>
             </div>
 

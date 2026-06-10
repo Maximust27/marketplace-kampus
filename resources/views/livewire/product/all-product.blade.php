@@ -85,39 +85,7 @@
                     </div>
                 </div>
 
-                <!-- Rating -->
-                <div class="border-t border-outline-variant/30 pt-4">
-                    <div class="flex items-center justify-between w-full text-left font-label-md text-base text-on-surface mb-3 group">
-                        <span class="font-bold">Penilaian Min.</span>
-                    </div>
-                    <div class="flex flex-col gap-2">
-                        <label class="flex items-center gap-3 cursor-pointer group">
-                            <input value="" wire:model.live="minRating" class="text-primary focus:ring-primary border-outline-variant w-4 h-4" name="minRating" type="radio"/>
-                            <span class="font-body-md text-sm text-on-surface-variant group-hover:text-primary transition-colors">Semua Rating</span>
-                        </label>
-                        <label class="flex items-center gap-3 cursor-pointer group">
-                            <input value="4.5" wire:model.live="minRating" class="text-primary focus:ring-primary border-outline-variant w-4 h-4" name="minRating" type="radio"/>
-                            <div class="flex items-center gap-1 text-yellow-400">
-                                <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
-                                <span class="text-sm text-on-surface-variant ml-1 font-body-md">4.5 Ke atas</span>
-                            </div>
-                        </label>
-                        <label class="flex items-center gap-3 cursor-pointer group">
-                            <input value="4.0" wire:model.live="minRating" class="text-primary focus:ring-primary border-outline-variant w-4 h-4" name="minRating" type="radio"/>
-                            <div class="flex items-center gap-1 text-yellow-400">
-                                <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
-                                <span class="text-sm text-on-surface-variant ml-1 font-body-md">4.0 Ke atas</span>
-                            </div>
-                        </label>
-                        <label class="flex items-center gap-3 cursor-pointer group">
-                            <input value="3.0" wire:model.live="minRating" class="text-primary focus:ring-primary border-outline-variant w-4 h-4" name="minRating" type="radio"/>
-                            <div class="flex items-center gap-1 text-yellow-400">
-                                <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
-                                <span class="text-sm text-on-surface-variant ml-1 font-body-md">3.0 Ke atas</span>
-                            </div>
-                        </label>
-                    </div>
-                </div>
+
             </div>
         </aside>
 
@@ -164,9 +132,6 @@
 
                             <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-3 pt-8">
                                 <div class="inline-flex items-center gap-1 bg-white px-2 py-0.5 rounded shadow-sm text-xs font-bold text-black">
-                                    <span class="material-symbols-outlined text-[14px] text-yellow-400" style="font-variation-settings: 'FILL' 1;">star</span>
-                                    <span>{{ number_format($product->avg_rating, 1) }}</span>
-                                    <span class="text-gray-300">|</span>
                                     <span class="text-gray-600 font-medium">Terjual {{ $product->sold_count }}</span>
                                 </div>
                             </div>
